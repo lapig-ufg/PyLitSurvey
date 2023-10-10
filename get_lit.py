@@ -231,7 +231,6 @@ def get_text(openalex)-> Tuple[Status,str]:
         save_file(text_name)
         document = {
             '_id': _id,
-            'in_text': in_txt(text),
             **openalex,
             'lapig':{
                 'docs':{
