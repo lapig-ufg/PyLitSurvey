@@ -15,7 +15,7 @@ def save_file(file):
     bucket_name = settings.MINIO_BUCKET_NAME
     file = str(file)
     try:
-        minio_client.fput_object(bucket_name, file_name_minio(file)', file)
+        minio_client.fput_object(bucket_name, file_name_minio(file), file)
     except Exception as error:
         logger.exception(error)
         return False
