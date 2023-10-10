@@ -2,7 +2,7 @@ from minio import Minio
 from PyLitSurvey.config import settings, logger
 
 def file_name_minio(file):
-    return file.split('bio_open/')[-1]
+    return str(file).split('bio_open/')[-1]
 
 def save_file(file):
     minio_client = Minio(
