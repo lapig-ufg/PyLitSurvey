@@ -68,15 +68,6 @@ def get_keys(txt):
             return True
     return False
 
-
-def in_txt(txt):
-    palavras = [
-    "gpp","npp","lue"
-    ]
-    for i in palavras:
-        if i in txt.lower():
-            return True
-    return False
     
 
 def get_weigth(url):
@@ -133,6 +124,13 @@ def get_info_text(text):
     common_words = freq_dist.most_common(10)
     tokens = nltk.word_tokenize(text)
 
+    gpp = len([token for token in tokens if token.lower() == 'gpp'])
+    lue= len([token for token in tokens if token.lower() == 'lue'])
+    
+    count = {
+        'gpp': gpp,
+        'lue':lue
+    }
     # Crie trigramas
     trigramas = list(ngrams(words_without_stopwords, 3))
     bigramas = list(ngrams(words_without_stopwords, 2))
@@ -144,7 +142,7 @@ def get_info_text(text):
     # Encontre os 10 trigramas mais usados
     top_10_trigramas = contagem_trigramas.most_common(10)
     top_10_bigramas = contagem_bigramas.most_common(10)
-    return common_words, top_10_bigramas, top_10_trigramas, sentences
+    return common_words, top_10_bigramas, top_10_trigramas, sentences,count
 
 
 def get_text(openalex)-> Tuple[Status,str]:
@@ -220,6 +218,7 @@ def get_text(openalex)-> Tuple[Status,str]:
             top_10_bigramas,
             top_10_trigramas,
             sentences,
+            count
         ) = get_info_text(text)
 
         ### Dar peso a referencia
@@ -239,6 +238,7 @@ def get_text(openalex)-> Tuple[Status,str]:
                     'pdf':f"{settings.MINIO_URL}/{settings.MINIO_BUCKET_NAME}/{file_name_minio(pdf_name)}",
                     'txt':f"{settings.MINIO_URL}/{settings.MINIO_BUCKET_NAME}/{file_name_minio(text_name)}",
                 },
+                'count':count,
                 'common_words': common_words,
                 'bigramas': top_10_bigramas,
                 'trigramas': top_10_trigramas,
