@@ -10,7 +10,7 @@ import textract
 from nltk.probability import FreqDist
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.util import ngrams
-from pyalex import Works
+from pyalex import Works, Sources, Authors
 from pymongo import MongoClient
 from requests import get
 
@@ -124,13 +124,42 @@ def get_info_text(text):
     common_words = freq_dist.most_common(10)
     tokens = nltk.word_tokenize(text)
 
-    gpp = len([token for token in tokens if token.lower() == 'gpp'])
-    lue= len([token for token in tokens if token.lower() == 'lue'])
+    text_lower = text.lower()
+    conunt_keys = [
+        'Conversion factor',
+        'GPP',
+        'Gross Primary Productivity',
+        'GPP measurements',
+        'Plant photosynthesis data',
+        'Primary production data',
+        'Ecosystem productivity',
+        'Carbon fixation rates',
+        'Vegetation productivity',
+        'Dry biomass',
+        'Photosynthetic activity',
+        'NPP',
+        'Net Primary Productivity',
+        'NPP measurements',
+        'Biomass accumulation',
+        'Ecosystem energy',
+        'Net carbon',
+        'Plant respiration',
+        'LUE',
+        'fAPAR',
+        'PAR',
+        'NPP/GPP ratios',
+
+
+        
+    ]
+    count = {}
+    for key in conunt_keys:
+        id_key = key.lower().replace(' ','_').replace('/','_')
+        if len(key.split(' ')) > 1:
+            count[id_key] = text_lower.count(key.lower())
+        else:
+            count[id_key] = len([token for token in tokens if token.lower() == key.lower()])
     
-    count = {
-        'gpp': gpp,
-        'lue':lue
-    }
     # Crie trigramas
     trigramas = list(ngrams(words_without_stopwords, 3))
     bigramas = list(ngrams(words_without_stopwords, 2))
@@ -225,6 +254,25 @@ def get_text(openalex)-> Tuple[Status,str]:
         referenced_works = []
         for ref in openalex['referenced_works']:
             referenced_works.append(get_weigth(ref))
+
+
+        authorships = []
+        
+        for authorship in openalex['authorships']:
+            summary_stats = Authors()[authorship['id'].replace('https://openalex.org/','')]['summary_stats']
+            authorship['summary_stats'] = summary_stats
+            authorships.append(authorship)
+            
+        openalex['authorships']= authorships
+        
+        locations = []
+        
+        for location in openalex['locations']:
+            summary_stats = Sources()[location['source']['id'].replace('https://openalex.org/','')]['summary_stats']
+            location['source']['summary_stats'] = summary_stats
+            locations.append(location)
+            
+        openalex['locations'] = locations
 
         openalex['referenced_works'] = referenced_works
         save_file(pdf_name)
