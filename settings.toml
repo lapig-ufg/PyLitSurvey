@@ -1,0 +1,9 @@
+[default]
+DEBUG=true
+VERSION=2
+MONGO_URI='mongodb://localhost:27017'
+MINIO_ENDPOINT='localhost:9000'
+MINIO_ACCESS_KEY='admin'
+MINIO_SECRET_KEY='password'
+MINIO_BUCKET_NAME='public'
+MINIO_URL='http://localhost:9000/public'
