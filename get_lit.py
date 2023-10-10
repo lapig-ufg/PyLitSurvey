@@ -259,8 +259,8 @@ def get_text(openalex)-> Tuple[Status,str]:
         authorships = []
         
         for authorship in openalex['authorships']:
-            summary_stats = Authors()[authorship['id'].replace('https://openalex.org/','')]['summary_stats']
-            authorship['summary_stats'] = summary_stats
+            summary_stats = Authors()[authorship['author']['id'].replace('https://openalex.org/','')]['summary_stats']
+            authorship['author']['summary_stats'] = summary_stats
             authorships.append(authorship)
             
         openalex['authorships']= authorships
