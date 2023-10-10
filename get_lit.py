@@ -4,6 +4,7 @@ from datetime import datetime
 from multiprocessing import Pool
 from pathlib import Path
 from typing import Tuple
+from time import sleep
 
 import nltk
 import textract
@@ -259,6 +260,7 @@ def get_text(openalex)-> Tuple[Status,str]:
         authorships = []
         
         for authorship in openalex['authorships']:
+            sleep(1)
             summary_stats = Authors()[authorship['author']['id'].replace('https://openalex.org/','')]['summary_stats']
             authorship['author']['summary_stats'] = summary_stats
             authorships.append(authorship)
@@ -268,6 +270,7 @@ def get_text(openalex)-> Tuple[Status,str]:
         locations = []
         
         for location in openalex['locations']:
+            sleep(1)
             summary_stats = Sources()[location['source']['id'].replace('https://openalex.org/','')]['summary_stats']
             location['source']['summary_stats'] = summary_stats
             locations.append(location)
