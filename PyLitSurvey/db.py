@@ -12,6 +12,7 @@ def save_file(file):
         secure=True,
     )
     bucket_name = settings.MINIO_BUCKET_NAME
+    file = str(file)
     file_name = file_name_minio(file)
     try:
         minio_client.fput_object(bucket_name, f'bio_open/{file_name}', file)
