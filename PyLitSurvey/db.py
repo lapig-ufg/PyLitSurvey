@@ -2,7 +2,8 @@ from minio import Minio
 from PyLitSurvey.config import settings, logger
 
 def file_name_minio(file):
-    return str(file).split('bio_open/')[-1]
+    name = str(file).split('bio_open/')[-1]
+    return f"bio_open/{name}"
 
 def save_file(file):
     minio_client = Minio(
@@ -13,9 +14,8 @@ def save_file(file):
     )
     bucket_name = settings.MINIO_BUCKET_NAME
     file = str(file)
-    file_name = file_name_minio(file)
     try:
-        minio_client.fput_object(bucket_name, f'bio_open/{file_name}', file)
+        minio_client.fput_object(bucket_name, file_name_minio(file)', file)
     except Exception as error:
         logger.exception(error)
         return False
