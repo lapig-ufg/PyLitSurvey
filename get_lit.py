@@ -260,23 +260,29 @@ def get_text(openalex)-> Tuple[Status,str]:
 
         authorships = []
         
-        for authorship in openalex['authorships']:
-            sleep(random.randint(5, 10))
-            summary_stats = Authors()[authorship['author']['id'].replace('https://openalex.org/','')]['summary_stats']
-            authorship['author']['summary_stats'] = summary_stats
-            authorships.append(authorship)
+        for n, authorship in enumerate(openalex['authorships']):
+            if n == 0:
+                sleep(random.randint(5, 10))
+                summary_stats = Authors()[authorship['author']['id'].replace('https://openalex.org/','')]['summary_stats']
+                authorship['author']['summary_stats'] = summary_stats
+                authorships.append(authorship)
+            if n > 0:
+                break
             
-        openalex['authorships']= authorships
+        openalex['author_first']= authorships
         
         locations = []
         
-        for location in openalex['locations']:
-            sleep(random.randint(5, 10))
-            summary_stats = Sources()[location['source']['id'].replace('https://openalex.org/','')]['summary_stats']
-            location['source']['summary_stats'] = summary_stats
-            locations.append(location)
+        for n, location in enumerate(openalex['locations']):
+            if n == 0:
+                sleep(random.randint(5, 10))
+                summary_stats = Sources()[location['source']['id'].replace('https://openalex.org/','')]['summary_stats']
+                location['source']['summary_stats'] = summary_stats
+                locations.append(location)
+            if n > 0:
+                break
             
-        openalex['locations'] = locations
+        openalex['souce_first'] = locations
 
         openalex['referenced_works'] = referenced_works
         save_file(pdf_name)
@@ -337,16 +343,22 @@ def run_objs(objs):
                 logger.info(f'Ja baixou ou fez o check: {_id}')
 
 logger.debug('init coleta')
-w = (
-    Works()
-    .search(
-        '(grazing AND land) OR pastureland OR pastures OR rangelands OR grasslands OR  savannas OR (grassland AND ecosystems) OR meadows OR prairies OR steppes OR  (grazable AND forestland) OR shrublands'
-    )
-    .select(select)
-    .filter(is_oa=True)
-    .paginate(per_page=200 ) #, n_max=None)
-)
 
-logger.debug('init pool')
-with Pool(16) as works:
-    result_final = works.map(run_objs, w)
+
+for year in range(2000,2023):
+    
+    w = (
+        Works()
+        .search(
+            '(grazing AND land) OR pastureland OR pastures OR rangelands OR grasslands OR  savannas OR (grassland AND ecosystems) OR meadows OR prairies OR steppes OR  (grazable AND forestland) OR shrublands'
+        )
+        .select(select)
+        .filter(publication_year=year, is_oa=True)
+        
+    )
+    total = w.count()
+    logger.info('Obtenado ano {year} total de artigos {total}')
+    w = w.paginate(per_page=200, n_max=None) 
+    logger.debug('init pool')
+    with Pool(16) as works:
+        result_final = works.map(run_objs, w)
