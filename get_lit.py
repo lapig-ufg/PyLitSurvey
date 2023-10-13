@@ -357,7 +357,7 @@ for year in range(2000,2023):
         
     )
     total = w.count()
-    logger.info('Obtenado ano {year} total de artigos {total}')
+    logger.info(f'Obtenado ano {year} total de artigos {total}')
     w = w.paginate(per_page=200, n_max=None) 
     logger.debug('init pool')
     with Pool(16) as works:
