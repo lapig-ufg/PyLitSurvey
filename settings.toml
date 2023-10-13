@@ -7,3 +7,4 @@ MINIO_ACCESS_KEY='admin'
 MINIO_SECRET_KEY='password'
 MINIO_BUCKET_NAME='public'
 MINIO_URL='http://localhost:9000/public'
+CORES=16

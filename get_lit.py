@@ -346,7 +346,6 @@ logger.debug('init coleta')
 
 
 for year in range(2000,2023):
-    
     w = (
         Works()
         .search(
@@ -360,5 +359,5 @@ for year in range(2000,2023):
     logger.info(f'Obtenado ano {year} total de artigos {total}')
     w = w.paginate(per_page=200, n_max=None) 
     logger.debug('init pool')
-    with Pool(16) as works:
+    with Pool(settings.CORES) as works:
         result_final = works.map(run_objs, w)
