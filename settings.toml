@@ -1,5 +1,6 @@
 [default]
 DEBUG=true
+QUERY='(grazing land) OR pastureland OR pastures OR rangelands OR grasslands OR  savannas OR (grassland ecosystems) OR meadows OR prairies OR steppes OR (grazable forestland) OR shrublands'
 VERSION=2
 MONGO_URI='mongodb://localhost:27017'
 MINIO_ENDPOINT='localhost:9000'

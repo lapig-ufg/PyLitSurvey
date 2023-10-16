@@ -345,14 +345,14 @@ def run_objs(objs):
 logger.debug('init coleta')
 
 
-for year in range(2000,2023):
+for year in range(1900,2024):
     w = (
         Works()
         .search(
-            '(grazing AND land) OR pastureland OR pastures OR rangelands OR grasslands OR  savannas OR (grassland AND ecosystems) OR meadows OR prairies OR steppes OR  (grazable AND forestland) OR shrublands'
+            settings.QUERY
         )
         .select(select)
-        .filter(publication_year=year, is_oa=True)
+        .filter(publication_year=year)
         
     )
     total = w.count()

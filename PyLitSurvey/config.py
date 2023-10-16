@@ -20,6 +20,7 @@ select = [
     'id',
     'doi',
     'title',
+    'abstract_inverted_index',
     'relevance_score',
     'publication_date',
     'language',
