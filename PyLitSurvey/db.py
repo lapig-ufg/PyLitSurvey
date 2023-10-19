@@ -1,9 +1,12 @@
 from minio import Minio
-from PyLitSurvey.config import settings, logger
+
+from PyLitSurvey.config import logger, settings
+
 
 def file_name_minio(file):
     name = str(file).split('bio_open/')[-1]
-    return f"bio_open/{name}"
+    return f'bio_open/{name}'
+
 
 def save_file(file):
     minio_client = Minio(

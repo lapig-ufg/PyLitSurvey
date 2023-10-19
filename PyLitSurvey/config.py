@@ -1,7 +1,7 @@
 import sys
 
-from loguru import logger
 from dynaconf import Dynaconf
+from loguru import logger
 from nltk.corpus import stopwords
 
 settings = Dynaconf(

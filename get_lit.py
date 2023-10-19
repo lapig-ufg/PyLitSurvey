@@ -1,51 +1,51 @@
+import random
 import re
 from collections import Counter
 from datetime import datetime
 from multiprocessing import Pool
 from pathlib import Path
-from typing import Tuple
 from time import sleep
-import random
+from typing import Tuple
 
 import nltk
 import textract
 from nltk.probability import FreqDist
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.util import ngrams
-from pyalex import Works, Sources, Authors
+from pyalex import Authors, Sources, Works
 from pymongo import MongoClient
 from requests import get
 
-from PyLitSurvey.config import logger, select, stop_words, settings
-from PyLitSurvey.db import save_file, file_name_minio
-from PyLitSurvey.funcs import get_francao, is_pdf, remove_path
+from PyLitSurvey.config import logger, select, settings, stop_words
+from PyLitSurvey.db import file_name_minio, save_file
+from PyLitSurvey.funcs import count_keys, get_francao, is_pdf, remove_path
 from PyLitSurvey.model import Status
 
 
 def get_keys(txt):
     palavras = [
-        "conversion factor",
-        "gpp",
-        "gross primary productivity",
-        "gpp measurements",
-        "plant photosynthesis data",
-        "primary production data",
-        "ecosystem productivity",
-        "carbon fixation rates",
-        "vegetation productivity",
-        "dry biomass",
-        "photosynthetic activity",
-        "npp",
-        "net primary productivity",
-        "npp measurements",
-        "biomass accumulation",
-        "ecosystem energy",
-        "net carbon",
-        "plant respiration",
-        "lue",
-        "fapar",
-        "par",
-        "npp/gpp ratios",
+        'conversion factor',
+        'gpp',
+        'gross primary productivity',
+        'gpp measurements',
+        'plant photosynthesis data',
+        'primary production data',
+        'ecosystem productivity',
+        'carbon fixation rates',
+        'vegetation productivity',
+        'dry biomass',
+        'photosynthetic activity',
+        'npp',
+        'net primary productivity',
+        'npp measurements',
+        'biomass accumulation',
+        'ecosystem energy',
+        'net carbon',
+        'plant respiration',
+        'lue',
+        'fapar',
+        'par',
+        'npp/gpp ratios',
         'grazing',
         'land',
         'pastureland',
@@ -63,14 +63,13 @@ def get_keys(txt):
         'shrublands',
         'gpp',
         'satellite',
-        'spectral'
+        'spectral',
     ]
     for i in palavras:
         if i in txt.lower():
             return True
     return False
 
-    
 
 def get_weigth(url):
     _id_refre = url.split('/')[-1]
@@ -86,17 +85,19 @@ def get_weigth(url):
             concepts_weigth = get_francao(concepts_interesse, max_concepts, 33)
         except:
             concepts_weigth = 0
-            
+
         try:
             common_words = w['common_words']
             max_common_words = len(common_words)
             common_words_interesse = len(
                 [i for i in common_words if get_keys(i[0])]
             )
-            common_words_weigth = get_francao(common_words_interesse, max_common_words, 33)
+            common_words_weigth = get_francao(
+                common_words_interesse, max_common_words, 33
+            )
         except:
             common_words_weigth = 0
-            
+
         try:
             ngrams = get(w['ngrams_url']).json()['ngrams']
             totoal = len(ngrams)
@@ -124,44 +125,9 @@ def get_info_text(text):
 
     # Palavras mais comuns
     common_words = freq_dist.most_common(10)
-    tokens = nltk.word_tokenize(text)
 
-    text_lower = text.lower()
-    conunt_keys = [
-        'Conversion factor',
-        'GPP',
-        'Gross Primary Productivity',
-        'GPP measurements',
-        'Plant photosynthesis data',
-        'Primary production data',
-        'Ecosystem productivity',
-        'Carbon fixation rates',
-        'Vegetation productivity',
-        'Dry biomass',
-        'Photosynthetic activity',
-        'NPP',
-        'Net Primary Productivity',
-        'NPP measurements',
-        'Biomass accumulation',
-        'Ecosystem energy',
-        'Net carbon',
-        'Plant respiration',
-        'LUE',
-        'fAPAR',
-        'PAR',
-        'NPP/GPP ratios',
+    count = count_keys(text)
 
-
-        
-    ]
-    count = {}
-    for key in conunt_keys:
-        id_key = key.lower().replace(' ','_').replace('/','_')
-        if len(key.split(' ')) > 1:
-            count[id_key] = text_lower.count(key.lower())
-        else:
-            count[id_key] = len([token for token in tokens if token.lower() == key.lower()])
-    
     # Crie trigramas
     trigramas = list(ngrams(words_without_stopwords, 3))
     bigramas = list(ngrams(words_without_stopwords, 2))
@@ -173,10 +139,10 @@ def get_info_text(text):
     # Encontre os 10 trigramas mais usados
     top_10_trigramas = contagem_trigramas.most_common(10)
     top_10_bigramas = contagem_bigramas.most_common(10)
-    return common_words, top_10_bigramas, top_10_trigramas, sentences,count
+    return common_words, top_10_bigramas, top_10_trigramas, sentences, count
 
 
-def get_text(openalex)-> Tuple[Status,str]:
+def get_text(openalex) -> Tuple[Status, str]:
     doi = openalex['doi']
 
     _id = openalex['id'].split('/')[-1]
@@ -233,7 +199,6 @@ def get_text(openalex)-> Tuple[Status,str]:
             remove_path(path)
             logger.error(f'not pdf {_id} {doi}')
             return Status.NOTPDF, f'not pdf {_id} {doi}'
-            
 
     except Exception as error:
         remove_path(path)
@@ -249,7 +214,7 @@ def get_text(openalex)-> Tuple[Status,str]:
             top_10_bigramas,
             top_10_trigramas,
             sentences,
-            count
+            count,
         ) = get_info_text(text)
 
         ### Dar peso a referencia
@@ -257,31 +222,38 @@ def get_text(openalex)-> Tuple[Status,str]:
         for ref in openalex['referenced_works']:
             referenced_works.append(get_weigth(ref))
 
-
         authorships = []
-        
+
         for n, authorship in enumerate(openalex['authorships']):
             if n == 0:
                 sleep(random.randint(5, 10))
-                summary_stats = Authors()[authorship['author']['id'].replace('https://openalex.org/','')]['summary_stats']
+                summary_stats = Authors()[
+                    authorship['author']['id'].replace(
+                        'https://openalex.org/', ''
+                    )
+                ]['summary_stats']
                 authorship['author']['summary_stats'] = summary_stats
                 authorships.append(authorship)
             if n > 0:
                 break
-            
-        openalex['author_first']= authorships
-        
+
+        openalex['author_first'] = authorships
+
         locations = []
-        
+
         for n, location in enumerate(openalex['locations']):
             if n == 0:
                 sleep(random.randint(5, 10))
-                summary_stats = Sources()[location['source']['id'].replace('https://openalex.org/','')]['summary_stats']
+                summary_stats = Sources()[
+                    location['source']['id'].replace(
+                        'https://openalex.org/', ''
+                    )
+                ]['summary_stats']
                 location['source']['summary_stats'] = summary_stats
                 locations.append(location)
             if n > 0:
                 break
-            
+
         openalex['souce_first'] = locations
 
         openalex['referenced_works'] = referenced_works
@@ -290,17 +262,18 @@ def get_text(openalex)-> Tuple[Status,str]:
         document = {
             '_id': _id,
             **openalex,
-            'lapig':{
-                'docs':{
-                    'pdf':f"{settings.MINIO_URL}/{settings.MINIO_BUCKET_NAME}/{file_name_minio(pdf_name)}",
-                    'txt':f"{settings.MINIO_URL}/{settings.MINIO_BUCKET_NAME}/{file_name_minio(text_name)}",
+            'download': True,
+            'lapig': {
+                'docs': {
+                    'pdf': f'{settings.MINIO_URL}/{settings.MINIO_BUCKET_NAME}/{file_name_minio(pdf_name)}',
+                    'txt': f'{settings.MINIO_URL}/{settings.MINIO_BUCKET_NAME}/{file_name_minio(text_name)}',
                 },
-                'count':count,
+                'count': count,
                 'common_words': common_words,
                 'bigramas': top_10_bigramas,
                 'trigramas': top_10_trigramas,
-                'sentences': [s for s in sentences if get_keys(s)]
-                }
+                'sentences': [s for s in sentences if get_keys(s)],
+            },
         }
 
         with MongoClient(settings.MONGO_URI) as client:
@@ -342,22 +315,20 @@ def run_objs(objs):
             else:
                 logger.info(f'Ja baixou ou fez o check: {_id}')
 
+
 logger.debug('init coleta')
 
 
-for year in range(1900,2024):
+for year in range(1900, 2024):
     w = (
         Works()
-        .search(
-            settings.QUERY
-        )
+        .search(settings.QUERY)
         .select(select)
         .filter(publication_year=year)
-        
     )
     total = w.count()
     logger.info(f'Obtenado ano {year} total de artigos {total}')
-    w = w.paginate(per_page=200, n_max=None) 
+    w = w.paginate(per_page=200, n_max=None)
     logger.debug('init pool')
     with Pool(settings.CORES) as works:
         result_final = works.map(run_objs, w)
