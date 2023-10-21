@@ -84,7 +84,7 @@ def save_db_file(openalex):
         'download': False,
         'source_fist': source_fist,
         'author_fist': author_fist,
-        'lapig': {'count': count_keys(abstract)},
+        'lapig': {'count_abstract': count_keys(abstract)},
         **openalex,
         'ngrams': ngrams,
     }
