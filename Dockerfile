@@ -6,9 +6,10 @@ WORKDIR /app
 
 # Copy the requirements file into the container at /app
 COPY requirements.txt /app/
+COPY install.py /app/
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && \
+    python install.py
 
-# Command to start an interactive shell
-CMD [ "bash" ]
+CMD ["tail", "-f", "/dev/null"]

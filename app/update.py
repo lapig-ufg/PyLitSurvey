@@ -7,9 +7,9 @@ from pyalex import Works
 from pymongo import MongoClient
 from requests import get
 
-from app.PyLitSurvey.config import logger, select, settings
-from app.PyLitSurvey.funcs import count_keys
-from app.PyLitSurvey.model import Status
+from PyLitSurvey.config import logger, select, settings
+from PyLitSurvey.funcs import count_keys
+from PyLitSurvey.model import Status
 
 BASE_API = 'https://api.openalex.org/'
 

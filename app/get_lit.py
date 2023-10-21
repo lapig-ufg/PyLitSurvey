@@ -15,10 +15,10 @@ from pyalex import Authors, Sources, Works
 from pymongo import MongoClient
 from requests import get
 
-from app.PyLitSurvey.config import logger, select, settings, stop_words
-from app.PyLitSurvey.db import file_name_minio, save_file
-from app.PyLitSurvey.funcs import count_keys, get_francao, is_pdf, remove_path
-from app.PyLitSurvey.model import Status
+from PyLitSurvey.config import logger, select, settings, stop_words
+from PyLitSurvey.db import file_name_minio, save_file
+from PyLitSurvey.funcs import count_keys, get_francao, is_pdf, remove_path
+from PyLitSurvey.model import Status
 
 
 def get_keys(txt):
