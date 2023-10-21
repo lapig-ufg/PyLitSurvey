@@ -9,7 +9,11 @@ COPY requirements.txt /app/
 COPY install.py /app/
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt && \
+RUN apt update && \
+    apt install --no-install-recommends -y  nano \
+    screen && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir -r requirements.txt && \
     python install.py
 
 CMD ["tail", "-f", "/dev/null"]
