@@ -2,7 +2,6 @@ version: '3'
 services:
   py-lit-surevey:
     build:
-      context: ./app
       dockerfile: Dockerfile
     container_name: py-lit-surevey
     working_dir: /app
