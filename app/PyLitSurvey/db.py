@@ -1,6 +1,6 @@
 from minio import Minio
 
-from PyLitSurvey.config import logger, settings
+from app.PyLitSurvey.config import logger, settings
 
 
 def file_name_minio(file):

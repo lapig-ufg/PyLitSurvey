@@ -1,6 +1,6 @@
 import shutil
 
-from PyLitSurvey.config import logger
+from app.PyLitSurvey.config import logger
 
 
 def count_keys(text) -> dict:
