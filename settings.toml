@@ -1,0 +1,37 @@
+[default]
+DEBUG=true
+QUERY='(grazing land) OR pastureland OR pasture OR rangeland OR grassland OR  pastorage OR savanna OR savannah OR (grassland ecosystems) OR meadows OR prairies OR steppes OR (grazable forestland) OR shrubland OR (forage crop) OR (perennial forage) OR grasses'
+COUNTING_WORDS=['GPP',
+    'Gross Primary Productivity',
+    'NPP',
+    'Net Primary Productivity',
+    'LUE',
+    'Light-Use Efficiency',
+    'Light use efficiency',
+    'fAPAR',
+    'Fraction of Absorbed Photosynthetically Active Radiation',
+    'LAI',
+    'Leaf area index',
+    'PAR',
+    'APAR',
+    'Conversion factor',
+    'Plant photosynthesis data',
+    'Primary production data',
+    'Ecosystem productivity',
+    'Carbon fixation rates',
+    'Vegetation productivity',
+    'Dry biomass',
+    'Photosynthetic activity',
+    'Biomass accumulation',
+    'Ecosystem energy',
+    'Net carbon',
+    'Plant respiration',
+    'NPP/GPP ratios']
+VERSION='1'
+MONGO_URI='mongodb://localhost:27017'
+MINIO_ENDPOINT='localhost:9000'
+MINIO_ACCESS_KEY='admin'
+MINIO_SECRET_KEY='password'
+MINIO_BUCKET_NAME='public'
+MINIO_URL='http://localhost:9000/public'
+CORES=48

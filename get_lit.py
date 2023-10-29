@@ -294,40 +294,58 @@ def get_text(openalex) -> Tuple[Status, str]:
 def run_objs(objs):
     logger.info('start objs')
     for obj in objs:
-        with MongoClient(settings.MONGO_URI) as client:
-            db = client['biblimetry']
-            status_download = db[f'baixado_pasture_open_v{settings.VERSION}']
-            _id = obj['id'].split('/')[-1]
-            if not status_download.find_one({'_id': _id}):
-                status_file = get_text(obj)
-                status_download.update_one(
-                    {'_id': _id},
-                    {
-                        '$set': {
-                            '_id': _id,
-                            'datetime': datetime.now(),
-                            'status': status_file,
-                        }
-                    },
-                    upsert=True,
-                )
-            else:
-                logger.info(f'Ja baixou ou fez o check: {_id}')
+        try:
+            with MongoClient(settings.MONGO_URI) as client:
+                db = client['biblimetry']
+                status_download = db[f'baixado_pasture_open_v{settings.VERSION}']
+                _id = obj['id'].split('/')[-1]
+                if not status_download.find_one({'_id': _id}):
+                    status_file = get_text(obj)
+                    status_download.update_one(
+                        {'_id': _id},
+                        {
+                            '$set': {
+                                '_id': _id,
+                                'datetime': datetime.now(),
+                                'status': status_file,
+                            }
+                        },
+                        upsert=True,
+                    )
+                else:
+                    logger.info(f'Ja baixou ou fez o check: {_id}')
+        except:
+            return False
+    return True
 
 
 logger.debug('init coleta')
 
 
-for year in range(1900, 2024):
-    w = (
-        Works()
-        .search(settings.QUERY)
-        .select(select)
-        .filter(publication_year=year)
-    )
-    total = w.count()
-    logger.info(f'Obtenado ano {year} total de artigos {total}')
-    w = w.paginate(per_page=200, n_max=None)
-    logger.debug('init pool')
-    with Pool(settings.CORES) as works:
-        result_final = works.map(run_objs, w)
+for year in reversed(range(1900, 2024)):
+    logger.info(f'Year {year}')
+    with MongoClient(settings.MONGO_URI) as client:
+        db = client['biblimetry']
+        colecao = db[f'pasture_open_year_v{settings.VERSION}']
+        d = colecao.find_one({'_id':year})
+    if not d:
+        w = (
+            Works()
+            .search(settings.QUERY)
+            .select(select)
+            .filter(publication_year=year)
+        )
+        total = w.count()
+        logger.info(f'Obtenado ano {year} total de artigos {total}')
+        w = w.paginate(per_page=200, n_max=None)
+        logger.debug('init pool')
+        with Pool(settings.CORES) as works:
+            result_final = works.map(run_objs, w)
+        if all(result_final):
+            with MongoClient(settings.MONGO_URI) as client:
+                db = client['biblimetry']
+                colecao = db[f'pasture_open_year_v{settings.VERSION}']
+                colecao.update_one(
+                    {'_id': year}, {'$set': {'_id':year,'baixado':True}}, upsert=True
+                )
+

@@ -3,68 +3,38 @@ from multiprocessing import Pool
 from random import randint
 from time import sleep
 
+from typing import List
+
 from pyalex import Works
 from pymongo import MongoClient
-from requests import get
+
 
 from PyLitSurvey.config import logger, select, settings
-from PyLitSurvey.funcs import count_keys
+from PyLitSurvey.funcs import count_keys, get_id, get_data
 from PyLitSurvey.model import Status
 
 BASE_API = 'https://api.openalex.org/'
 
 
-def get_id(text):
-    return text.replace('https://openalex.org/', '')
-
-
-def get_data(url, get_item=False, erro=1):
-    try:
-        response = get(url)
-        match response.status_code:
-            case 200:
-                if get_item is False:
-                    return response.json()
-                else:
-                    return response.json()[get_item]
-            case 429:
-                if erro < 5:
-                    _time = randint(erro, 5 * erro)
-                    logger.info(
-                        f'Estou esperando por {_time} para tenta pegar os dados\n{url}'
-                    )
-                    sleep(_time)
-                    erro += 1
-                    get_data(url, get_item, erro)
-                else:
-                    return 429
-            case _:
-                logger.error(f'Error in status: {response.status_code}\n{url}')
-                return response.status_code
-    except:
-        logger.exception('error not map')
-        return dict()
-
-
-def save_db_file(openalex):
+def save_db_file(openalex:dict):
     _id = openalex['id'].split('/')[-1]
     try:
         ngrams = get_data(f'{BASE_API}works/{_id}/ngrams', 'ngrams')
     except:
         ngrams = f'https://api.openalex.org/works/{_id}/ngrams'
-
+    title = openalex['title']
     if not openalex['abstract_inverted_index'] is None:
-        abstract = openalex['abstract']
+        abstract = f"{title} {openalex['abstract']}"
     else:
-        abstract = ''
+        abstract = f'{title}'
     openalex['abstract_inverted_index'] = ''
 
-    author_fist, source_fist = None, None
+    author_first, source_first = None, None
 
     if len(openalex['authorships']) > 0:
         try:
             author_id = get_id(openalex['authorships'][0]['author']['id'])
-            author_fist = get_data(
+            author_first = get_data(
                 f'{BASE_API}authors/{author_id}?select=summary_stats'
             )
         except TypeError:
@@ -73,17 +43,19 @@ def save_db_file(openalex):
     if len(openalex['locations']) > 0:
         try:
             source_id = get_id(openalex['locations'][0]['source']['id'])
-            source_fist = get_data(
+            source_first = get_data(
                 f'{BASE_API}sources/{source_id}?select=summary_stats'
             )
         except TypeError:
             pass
 
+    publication_date = openalex['publication_date']
+    openalex['publication_date'] = datetime.strptime(publication_date,'%Y-%m-%d')
     document = {
         '_id': _id,
         'download': False,
-        'source_fist': source_fist,
-        'author_fist': author_fist,
+        'source_first': source_first,
+        'author_first': author_first,
         'lapig': {'count_abstract': count_keys(abstract)},
         **openalex,
         'ngrams': ngrams,
@@ -97,12 +69,11 @@ def save_db_file(openalex):
         )
 
         logger.success(f'{_id} salve')
-        return Status.SUCCESS, 'success'
+        return Status.SUCCESS, Status.SUCCESS
 
 
-def run_objs(objs):
-    logger.info('start objs')
-    for obj in objs:
+def process_obj(obj:dict):
+    try:
         with MongoClient(settings.MONGO_URI) as client:
             db = client['biblimetry']
             status_download = db[f'baixado_pasture_open_v{settings.VERSION}']
@@ -121,20 +92,56 @@ def run_objs(objs):
                     upsert=True,
                 )
             else:
+                sleep(randint(1, 2))
                 logger.info(f'Ja baixou ou fez o check: {_id}')
-    return True
+        return True
+    except:
+        logger.exception(f'error in process: {obj["id"]}')
+        return False
 
 
-for year in range(1900, 2024):
-    w = (
-        Works()
-        .search(settings.QUERY)
-        .select(select)
-        .filter(publication_year=year)
-    )
-    total = w.count()
-    logger.info(f'Obtenado ano {year} total de artigos {total}')
-    w = w.paginate(per_page=200, n_max=None)
-    logger.debug('init pool')
+
+def run_objs(objs: List[dict]) -> List[bool]:
+    logger.info('start objs')
+    results = [False]
     with Pool(settings.CORES) as works:
-        result_final = works.map(run_objs, w)
+        results = works.map(process_obj, objs)
+    return results
+
+for year in reversed(range(1900, 2024)):
+    with MongoClient(settings.MONGO_URI) as client:
+        db = client['biblimetry']
+        docs_yaear = db[f'baixado_pasture_year_v{settings.VERSION}']
+        status_year = docs_yaear.find_one({'_id': year})
+
+    if not status_year:
+        logger.info(f'Iniciando ano {year}')
+        w = (
+            Works()
+            .search(settings.QUERY)
+            .select(select)
+            .filter(publication_year=year)
+        )
+        total = w.count()
+        logger.info(f'Obtenado ano {year} total de artigos {total}')
+        w = w.paginate(per_page=200, n_max=None)
+        logger.debug('init pool')
+        
+        for objs in w:
+            result_final =  run_objs(objs)
+            
+        if all(result_final):
+            with MongoClient(settings.MONGO_URI) as client:
+                db = client['biblimetry']
+                docs_yaear = db[f'baixado_pasture_year_v{settings.VERSION}']
+                docs_yaear.update_one(
+                        {'_id': year},
+                        {
+                            '$set': {
+                                '_id': year,
+                                'datetime': datetime.now(),
+                                'status': Status.SUCCESS.value,
+                            }
+                        },
+                        upsert=True,
+                    )
