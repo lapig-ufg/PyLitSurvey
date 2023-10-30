@@ -35,7 +35,7 @@ def save_db_file(openalex:dict):
         try:
             author_id = get_id(openalex['authorships'][0]['author']['id'])
             author_first = get_data(
-                f'{BASE_API}authors/{author_id}?select=summary_stats'
+                f'{BASE_API}authors/{author_id}'
             )
         except TypeError:
             pass
@@ -44,7 +44,7 @@ def save_db_file(openalex:dict):
         try:
             source_id = get_id(openalex['locations'][0]['source']['id'])
             source_first = get_data(
-                f'{BASE_API}sources/{source_id}?select=summary_stats'
+                f'{BASE_API}sources/{source_id}?select=summary_stats,cited_by_count,x_concepts'
             )
         except TypeError:
             pass
