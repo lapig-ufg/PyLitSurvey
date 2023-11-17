@@ -56,6 +56,7 @@ def save_db_file(openalex:dict):
         'download': False,
         'source_first': source_first,
         'author_first': author_first,
+        'text':{'abstract':abstract},
         'lapig': {'count_abstract': count_keys(abstract)},
         **openalex,
         'ngrams': ngrams,
