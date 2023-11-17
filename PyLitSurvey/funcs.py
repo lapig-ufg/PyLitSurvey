@@ -2,7 +2,8 @@ import shutil
 from random import randint
 from time import sleep
 from requests import get
-
+from nltk.tokenize import word_tokenize
+import numpy as np
 
 from PyLitSurvey.config import logger, settings
 
@@ -58,13 +59,24 @@ def get_id(text:str)-> str:
 
 def count_keys(text) -> dict:
     _count_keys = settings.COUNTING_WORDS
+    words = [i.lower()  for i in _count_keys if len(i.split(' ')) == 1]
+    ngramas = [i.lower() for i in _count_keys if len(i.split(' ')) > 1]
+    tokens = word_tokenize(text)
     count = {}
+    count_words_tmp = dict(zip(*np.unique([ i for i in tokens if i in words], return_counts=True)))
 
-    for key in _count_keys:
+    for i in words:
+        try:
+            count[i] = count_words_tmp[i]
+        except:
+            count[i] = 0
+
+    for key in ngramas:
         id_key = key.lower().replace(' ', '_').replace('/', '_')
         count[id_key] = text.lower().count(key.lower())
-
     return count
+
+
 
 
 def is_pdf(file_path):
