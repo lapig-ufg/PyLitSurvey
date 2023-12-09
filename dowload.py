@@ -74,8 +74,8 @@ def get_text(openalex) -> Tuple[Status, str, str]:
     path = root / Path(_id)
     path.mkdir(exist_ok=True)
 
-    pdf_name = path / f'{_id}.pdf'
-    text_name = path / f'{_id}.txt'
+    pdf_name = str(path / f'{_id}.pdf')
+    text_name = str(path / f'{_id}.txt')
     text = openalex['doi']
 
     if not is_pdf(pdf_name):
