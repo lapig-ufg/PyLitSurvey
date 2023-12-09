@@ -313,7 +313,7 @@ with MongoClient(settings.MONGO_URI) as client:
    
     logger.info(f'len objs: {len(objs)}')
     with Pool(settings.CORES) as works:
-        results = works.map(get_text, objs)
+        results = works.map(run_objs, objs)
 
     logger.debug(results)
 
