@@ -5,7 +5,6 @@ from time import sleep
 from requests import get
 from nltk.tokenize import word_tokenize
 
-
 from PyLitSurvey.config import logger, settings
 
 
@@ -86,6 +85,8 @@ def count_keys(text):
         id_key = key.lower().replace(' ', '_').replace('/', '_')
         count[id_key] = text.lower().count(key.lower())
     return count
+
+
 
 
 def is_pdf(file_path):
