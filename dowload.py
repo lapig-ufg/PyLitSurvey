@@ -172,7 +172,7 @@ def get_text(openalex) -> Tuple[Status, str]:
 def run_objs(objs) -> bool:
     _id = objs['_id']
     
-    with MongoClient() as client:
+    with MongoClient(settings.MONGO_URI) as client:
         db = client['biblimetry']
         colecao = db[f'pasture_open_download_v{settings.VERSION}']
         status_download = db[f'pasture_open_download_staus_v{settings.VERSION}']
