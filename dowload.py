@@ -19,12 +19,17 @@ from PyLitSurvey.db import file_name_minio, save_file
 from PyLitSurvey.funcs import count_keys, is_pdf, remove_path, there_words
 from PyLitSurvey.model import Status
 
+from typing import NamedTuple
+
+class StatusReturn(NamedTuple):
+    status: str
+    mensagem: str
+    url: str
 
 
 
 
-
-def get_info_text(text):
+def get_info_text(text): 
     sentences = sent_tokenize(text)
     words = word_tokenize(
         text.lower()
@@ -55,7 +60,10 @@ def get_info_text(text):
     return common_words, top_10_bigramas, top_10_trigramas, sentences, count
 
 
-def get_text(openalex) -> Tuple[Status, str]:
+
+
+
+def get_text(openalex) -> Tuple[Status, str, str]:
     doi = openalex['doi']
 
     _id = openalex['_id']
@@ -77,17 +85,17 @@ def get_text(openalex) -> Tuple[Status, str]:
                 url = openalex['primary_location']['pdf_url']
             else:
                 remove_path(path)
-                return Status.NOTOPENACCESS, f'not open access {_id} {doi}'
+                return Status.NOTOPENACCESS, f'not open access {_id} {doi}', url
         except Exception as error:
             remove_path(path)
             logger.error(error)
-            return Status.ERROR, str(error)
+            return Status.ERROR, str(error), url
         try:
             response = get(url, allow_redirects=True)
         except Exception as error:
             remove_path(path)
             logger.exception(error)
-            return Status.HTTPERROR, str(error)
+            return Status.HTTPERROR, str(error), url
 
         if response.status_code == 200:
             with open(pdf_name, 'wb') as f:
@@ -95,7 +103,7 @@ def get_text(openalex) -> Tuple[Status, str]:
         else:
             remove_path(path)
             logger.error(f'not acess {response.status_code}')
-            return Status.NOT200CODE, str(response.status_code)
+            return Status.NOT200CODE, str(response.status_code), url
 
     try:
         if is_pdf(pdf_name):
@@ -112,12 +120,12 @@ def get_text(openalex) -> Tuple[Status, str]:
         else:
             remove_path(path)
             logger.error(f'not pdf {_id} {doi}')
-            return Status.NOTPDF, f'not pdf {_id} {doi}'
+            return Status.NOTPDF, f'not pdf {_id} {doi}', url
 
     except Exception as error:
         remove_path(path)
         logger.error(f'error {_id} {error} {doi}')
-        return Status.ERROR, str(error)
+        return Status.ERROR, str(error), url
 
     try:
         if text == '':
@@ -161,12 +169,12 @@ def get_text(openalex) -> Tuple[Status, str]:
             )
 
             logger.success(f'{_id} salve')
-        return Status.SUCCESS, 'success'
+        return Status.SUCCESS, 'success', url
         
     except Exception as error:
         remove_path(path)
         logger.exception(_id, url, error)
-        return Status.ERROR, str(error)
+        return Status.ERROR, str(error), url
 
 
 def run_objs(objs) -> bool:
@@ -179,11 +187,12 @@ def run_objs(objs) -> bool:
         result = colecao.find_one({'_id': _id})
         if not result:
             logger.info(f'baixando {_id}')
-            status, msg = get_text(objs)
+            status, msg, url = get_text(objs)
             status_download.update_one(
                  {'_id': _id}, {'$set': {
                      'status':status,
                      'msg': msg,
+                     'url': url,
                      }}, upsert=True
             )
             logger.info(f'{_id} {status} {msg}')
