@@ -72,7 +72,7 @@ def get_text(openalex) -> Tuple[Status, str]:
 
     if not is_pdf(pdf_name):
         try:
-            logger.debug(pdf_name)
+            logger.info(pdf_name)
             if openalex['primary_location']['pdf_url']:
                 url = openalex['primary_location']['pdf_url']
             else:
@@ -80,7 +80,7 @@ def get_text(openalex) -> Tuple[Status, str]:
                 return Status.NOTOPENACCESS, f'not open access {_id} {doi}'
         except Exception as error:
             remove_path(path)
-            logger.debug(error)
+            logger.error(error)
             return Status.ERROR, str(error)
         try:
             response = get(url, allow_redirects=True)
@@ -94,7 +94,7 @@ def get_text(openalex) -> Tuple[Status, str]:
                 f.write(response.content)
         else:
             remove_path(path)
-            logger.debug(f'not acess {response.status_code}')
+            logger.error(f'not acess {response.status_code}')
             return Status.NOT200CODE, str(response.status_code)
 
     try:
@@ -116,7 +116,7 @@ def get_text(openalex) -> Tuple[Status, str]:
 
     except Exception as error:
         remove_path(path)
-        logger.debug(f'error {_id} {error} {doi}')
+        logger.error(f'error {_id} {error} {doi}')
         return Status.ERROR, str(error)
 
     try:
@@ -186,7 +186,7 @@ def run_objs(objs) -> bool:
                      'msg': msg,
                      }}, upsert=True
             )
-            logger.debug(f'{_id} {status} {msg}')
+            logger.info(f'{_id} {status} {msg}')
         else:
             logger.info(f'ja baixou {_id}')
         return status
@@ -318,5 +318,5 @@ with MongoClient(settings.MONGO_URI) as client:
     with Pool(settings.CORES) as works:
         results = works.map(run_objs, objs)
 
-    logger.debug(results)
+    logger.info(results)
 
