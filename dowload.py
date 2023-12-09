@@ -68,7 +68,7 @@ def get_text(openalex) -> Tuple[Status, str, str]:
 
     _id = openalex['_id']
     logger.info(f'Downloading {_id}')
-    url = ''
+    url = openalex['doi']
     root = Path('bio_open')
     root.mkdir(exist_ok=True)
     path = root / Path(_id)
@@ -76,7 +76,7 @@ def get_text(openalex) -> Tuple[Status, str, str]:
 
     pdf_name = str(path / f'{_id}.pdf')
     text_name = str(path / f'{_id}.txt')
-    text = openalex['doi']
+    text = ''
 
     if not is_pdf(pdf_name):
         try:
