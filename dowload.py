@@ -169,6 +169,27 @@ def get_text(openalex) -> Tuple[Status, str]:
         return Status.ERROR, str(error)
 
 
+def run_objs(objs) -> bool:
+    _id = objs['_id']
+    
+    with MongoClient() as client:
+        db = client['biblimetry']
+        colecao = db[f'pasture_open_download_v{settings.VERSION}']
+        status_download = db[f'pasture_open_download_staus_v{settings.VERSION}']
+        result = colecao.find_one({'_id': _id})
+        if not result:
+            status, msg = get_text(objs)
+            status_download.update_one(
+                 {'_id': _id}, {'$set': {
+                     'status':status,
+                     'msg': msg,
+                     }}, upsert=True
+            )
+            logger.debug(f'{_id} {status} {msg}')
+        return status
+        
+
+
 
 
 logger.debug('init coleta')
