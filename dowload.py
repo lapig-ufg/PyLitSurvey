@@ -178,6 +178,7 @@ def run_objs(objs) -> bool:
         status_download = db[f'pasture_open_download_staus_v{settings.VERSION}']
         result = colecao.find_one({'_id': _id})
         if not result:
+            logger.info(f'baixando {_id}')
             status, msg = get_text(objs)
             status_download.update_one(
                  {'_id': _id}, {'$set': {
@@ -186,6 +187,8 @@ def run_objs(objs) -> bool:
                      }}, upsert=True
             )
             logger.debug(f'{_id} {status} {msg}')
+        else:
+            logger.info(f'ja baixou {_id}')
         return status
         
 
