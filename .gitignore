@@ -5,7 +5,7 @@ __pycache__/
 .secrets.toml
 # C extensions
 *.so
-
+bio_open/
 # Distribution / packaging
 .Python
 build/

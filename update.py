@@ -108,7 +108,7 @@ def run_objs(objs: List[dict]) -> List[bool]:
         results = works.map(process_obj, objs)
     return results
 
-for year in reversed(range(1900, 2024)):
+for year in reversed(range(2010, 2016)):
     with MongoClient(settings.MONGO_URI) as client:
         db = client['biblimetry']
         docs_yaear = db[f'baixado_pasture_year_v{settings.VERSION}']

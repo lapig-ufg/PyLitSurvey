@@ -27,8 +27,8 @@ COUNTING_WORDS=['GPP',
     'Net carbon',
     'Plant respiration',
     'NPP/GPP ratios']
-VERSION='1'
-MONGO_URI='mongodb://localhost:27017'
+VERSION='1004'
+MONGO_URI='mongodb://localhost:27020'
 MINIO_ENDPOINT='localhost:9000'
 MINIO_ACCESS_KEY='admin'
 MINIO_SECRET_KEY='password'
