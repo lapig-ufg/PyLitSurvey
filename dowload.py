@@ -76,7 +76,7 @@ def get_text(openalex) -> Tuple[Status, str, str]:
 
     pdf_name = path / f'{_id}.pdf'
     text_name = path / f'{_id}.txt'
-    text = ''
+    text = openalex['doi']
 
     if not is_pdf(pdf_name):
         try:
@@ -88,7 +88,7 @@ def get_text(openalex) -> Tuple[Status, str, str]:
                 return Status.NOTOPENACCESS, f'not open access {_id} {doi}', url
         except Exception as error:
             remove_path(path)
-            logger.error(error)
+            logger.exception(error)
             return Status.ERROR, str(error), url
         try:
             response = get(url, allow_redirects=True)
@@ -102,7 +102,7 @@ def get_text(openalex) -> Tuple[Status, str, str]:
                 f.write(response.content)
         else:
             remove_path(path)
-            logger.error(f'not acess {response.status_code}')
+            logger.exception(f'not acess {response.status_code}')
             return Status.NOT200CODE, str(response.status_code), url
 
     try:
@@ -119,12 +119,12 @@ def get_text(openalex) -> Tuple[Status, str, str]:
                 f.write(text)
         else:
             remove_path(path)
-            logger.error(f'not pdf {_id} {doi}')
+            logger.exception(f'not pdf {_id} {doi}')
             return Status.NOTPDF, f'not pdf {_id} {doi}', url
 
     except Exception as error:
         remove_path(path)
-        logger.error(f'error {_id} {error} {doi}')
+        logger.exception(f'error {_id} {error} {doi}')
         return Status.ERROR, str(error), url
 
     try:
