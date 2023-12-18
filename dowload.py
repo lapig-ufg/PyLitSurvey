@@ -28,6 +28,10 @@ class StatusReturn(NamedTuple):
 
 
 
+def doi2pdf(doi):
+  return doi
+
+
 
 def get_info_text(text): 
     sentences = sent_tokenize(text)
@@ -84,8 +88,8 @@ def get_text(openalex) -> Tuple[Status, str, str]:
             if openalex['primary_location']['pdf_url']:
                 url = openalex['primary_location']['pdf_url']
             else:
-                remove_path(path)
-                return Status.NOTOPENACCESS, f'not open access {_id} {doi}', url
+                url = doi2pdf(doi)
+                
         except Exception as error:
             remove_path(path)
             logger.exception(error)
@@ -93,17 +97,34 @@ def get_text(openalex) -> Tuple[Status, str, str]:
         try:
             response = get(url, allow_redirects=True)
         except Exception as error:
-            remove_path(path)
-            logger.exception(error)
-            return Status.HTTPERROR, str(error), url
+            try:
+              url = doi2pdf(doi)
+              response = get(url, allow_redirects=True)
+            except Exception as error:
+              remove_path(path)
+              logger.exception(error)
+              return Status.HTTPERROR, str(error), url
 
         if response.status_code == 200:
             with open(pdf_name, 'wb') as f:
                 f.write(response.content)
         else:
-            remove_path(path)
-            logger.exception(f'not acess {response.status_code}')
-            return Status.NOT200CODE, str(response.status_code), url
+            try:
+              url = doi2pdf(doi)
+              response = get(url, allow_redirects=True)
+            except Exception as error:
+              remove_path(path)
+              logger.exception(error)
+              return Status.HTTPERROR, str(error), url
+
+            if response.status_code == 200:
+                with open(pdf_name, 'wb') as f:
+                    f.write(response.content)
+            else:
+                remove_path(path)
+                logger.exception(f'not acess {response.status_code}')
+                return Status.NOT200CODE, str(response.status_code), url
+            
 
     try:
         if is_pdf(pdf_name):
