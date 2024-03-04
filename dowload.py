@@ -21,6 +21,9 @@ from PyLitSurvey.model import Status
 
 from typing import NamedTuple
 
+
+import urllib3
+
 class StatusReturn(NamedTuple):
     status: str
     mensagem: str
@@ -77,11 +80,14 @@ def get_text(openalex) -> Tuple[Status, str, str]:
     pdf_name = str(path / f'{_id}.pdf')
     text_name = str(path / f'{_id}.txt')
     text = ''
-
+    http = urllib3.PoolManager()
     if not is_pdf(pdf_name):
         try:
             logger.info(pdf_name)
-            if openalex['primary_location']['pdf_url']:
+            if openalex['open_access']['oa_url']:
+                url = openalex['open_access']['oa_url']
+            
+            elif openalex['primary_location']['pdf_url']:
                 url = openalex['primary_location']['pdf_url']
             else:
                 remove_path(path)
@@ -91,19 +97,19 @@ def get_text(openalex) -> Tuple[Status, str, str]:
             logger.exception(error)
             return Status.ERROR, str(error), url
         try:
-            response = get(url, allow_redirects=True)
+            response = http.request('GET', url,  timeout=3000)
         except Exception as error:
             remove_path(path)
             logger.exception(error)
             return Status.HTTPERROR, str(error), url
 
-        if response.status_code == 200:
+        if response.status == 200:
             with open(pdf_name, 'wb') as f:
-                f.write(response.content)
+                f.write(response.data)
         else:
             remove_path(path)
-            logger.exception(f'not acess {response.status_code}')
-            return Status.NOT200CODE, str(response.status_code), url
+            logger.exception(f'not acess {response.status}')
+            return Status.NOT200CODE, str(response.status), url
 
     try:
         if is_pdf(pdf_name):
@@ -218,108 +224,38 @@ with MongoClient(settings.MONGO_URI) as client:
               {
                 "$match":{
                     "$and": [
-                      {
+                          {
+                          "$or": [
 
-                        "$or": [
-                          {
-                            "lapig.count_abstract.gpp": 
+
                               {
-                              "$gt": 0
-                            }
+                                "lapig.count_abstract.lue": 
+                                  {
+                                  "$gt": 0
+                                }
+                              },
+                              {
+                                "lapig.count_abstract.light-use_efficiency":
+                                  {
+                                    "$gt": 0
+                                  }
+                              },
+                              {
+                                "lapig.count_abstract.light_use_efficiency":
+                                  {
+                                    "$gt": 0
+                                  }
+                              },
+
+                            ]
                           },
-                          {
-                            "lapig.count_abstract.gross_primary_productivity":
-                              {
-                                "$gt": 0
-                              }
-                          },
-                          {
-                            "lapig.count_abstract.npp": 
-                              {
-                              "$gt": 0
-                            }
-                          },
-                          {
-                            "lapig.count_abstract.net_primary_productivity":
-                              {
-                                "$gt": 0
-                              }
-                          },
-                          {
-                            "lapig.count_abstract.lue": 
-                              {
-                              "$gt": 0
-                            }
-                          },
-                          {
-                            "lapig.count_abstract.light-use_efficiency":
-                              {
-                                "$gt": 0
-                              }
-                          },
-                          {
-                            "lapig.count_abstract.light_use_efficiency":
-                              {
-                                "$gt": 0
-                              }
-                          },
-                          {
-                            "lapig.count_abstract.fapar": 
-                              {
-                              "$gt": 0
-                            }
-                          },
-                          {
-                            "lapig.count_abstract.fraction_of_absorbed_photosynthetically_active_radiation":
-                              {
-                                "$gt": 0
-                              }
-                          },
-                          {
-                            "lapig.count_abstract.lai": 
-                              {
-                              "$gt": 0
-                            }
-                          },
-                          {
-                            "lapig.count_abstract.leaf_area_index":
-                              {
-                                "$gt": 0
-                              }
-                          },
-                          {
-                            "lapig.count_abstract.par": 
-                              {
-                              "$gt": 0
-                            }
-                          },
-                          {
-                            "lapig.count_abstract.apar": 
-                              {
-                              "$gt": 0
-                            }
-                          },
-                          {
-                            "lapig.count_abstract.primary_production_data":
-                              {
-                                "$gt": 0
-                              }
-                          },
-                          {
-                            "lapig.count_abstract.photosynthetic_activity":
-                              {
-                                "$gt": 0
-                              }
-                          }
-                        ]
-                      },
-                        { "language": { "$in": ["en", "es", "pt", "fr", None] } },
-                        { "open_access.is_oa":True},
-                    ]
-                        
-              }}
-        
-        ]))
+                            { "language": { "$in": ["en", "es", "pt", "fr", None] } },
+                            {"open_access.is_oa":True},
+                            {"download":False}
+                        ]}
+                            
+                    
+              }]))
     
     
    
