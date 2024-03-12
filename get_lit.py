@@ -4,7 +4,7 @@ from pymongo.errors import DuplicateKeyError
 from tqdm import tqdm
 from PyLitSurvey.config import logger, settings
 
-w = Works().search(settings.QUERY).filter(language=settings.FILTER_LANG, publication_year:settings.MAXYEAR)
+w = Works().search(settings.QUERY).filter(language=settings.FILTER_LANG, publication_year=settings.MAXYEAR)
 
 total_iterations = w.count()
 
