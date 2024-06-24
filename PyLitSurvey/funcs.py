@@ -8,6 +8,14 @@ def abstract_inverted_index2abstract(abstract_inverted_index):
     return ' '.join([word for i, word in sorted(indexs.items())])
 
 def to_str(txt):
+    """
+
+    Args:
+        txt ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     if txt is None:
         return ''
     if isinstance(txt,dict):
