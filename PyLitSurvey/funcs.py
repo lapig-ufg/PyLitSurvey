@@ -1,6 +1,15 @@
 import pandas as pd
 
 def abstract_inverted_index2abstract(abstract_inverted_index):
+    """
+    Converte um índice invertido de resumo em um resumo textual.
+    
+    Parâmetros:
+    - abstract_inverted_index (dict): Um dicionário onde as chaves são palavras e os valores são listas de índices que representam a posição da palavra no resumo.
+    
+    Retorno:
+    - str: O resumo reconstruído a partir do índice invertido.
+    """
     indexs = {}
     for word, index in abstract_inverted_index.items():
         for i in index:
@@ -9,12 +18,13 @@ def abstract_inverted_index2abstract(abstract_inverted_index):
 
 def to_str(txt):
     """
-
-    Args:
-        txt ([type]): [description]
-
-    Returns:
-        [type]: [description]
+    Converte diferentes tipos de dados em uma string.
+    
+    Parâmetros:
+    - txt: O texto a ser convertido em string. Pode ser None, um dicionário, ou qualquer outro tipo.
+    
+    Retorno:
+    - str: A representação em string do texto fornecido. Se o texto for None ou um dicionário, retorna uma string vazia.
     """
     if txt is None:
         return ''
@@ -25,6 +35,15 @@ def to_str(txt):
     return txt
 
 def substituir_none_por_dict(dicionario):
+    """
+    Substitui valores None por dicionários vazios em um dicionário aninhado.
+    
+    Parâmetros:
+    - dicionario (dict): O dicionário a ser processado.
+    
+    Retorno:
+    - dict: O dicionário processado com None substituídos por dicionários vazios.
+    """
     for chave, valor in dicionario.items():
         if isinstance(valor, dict):
             substituir_none_por_dict(valor)
@@ -40,6 +59,16 @@ def substituir_none_por_dict(dicionario):
 
 
 def to_row(doc):
+    """
+    Converte um documento em um dicionário de valores simples, substituindo valores None por dicionários vazios
+    e concatenando listas em strings separadas por '|'.
+    
+    Parâmetros:
+    - doc (dict): O documento a ser convertido.
+    
+    Retorno:
+    - dict: Um dicionário de valores simples, adequado para ser transformado em uma linha de um DataFrame pandas.
+    """
     doc = substituir_none_por_dict(doc)
     _doc = {
         'id':doc.get("_id",''),

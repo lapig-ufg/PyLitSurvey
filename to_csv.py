@@ -11,6 +11,18 @@ SOUCER = []
 SOUCER_ID = []
 
 def filter_by_issn(locations):
+    """
+    Filters locations data based on ISSN.
+
+    Args:
+    - locations (list): List of location dictionaries.
+
+    Returns:
+    - Tuple of comma-separated strings: (display_name, souce_id, l_issns, soucer_is_med)
+
+    Raises:
+    - Exception: If there's an error processing locations data.
+    """
     # [{"is_oa": false, "landing_page_url": "https://doi.org/10.1146/annurev.ecolsys.28.1.517", "pdf_url": null, "source": {"id": "https://openalex.org/S4210205963", "display_name": "Annual review of ecology and systematics", "issn_l": "0066-4162", "issn": ["0066-4162", "2330-1902"], "is_oa": false, "is_in_doaj": false, "host_organization": "https://openalex.org/P4310320373", "host_organization_name": "Annual Reviews", "host_organization_lineage": ["https://openalex.org/P4310320373"], "host_organization_lineage_names": ["Annual Reviews"], "type": "journal"}, "license": null, "version": null, "is_accepted": false, "is_published": false}]
     l_issns = []
     display_name = []  
@@ -53,6 +65,9 @@ def filter_by_issn(locations):
         
 
 def to_csv_all_columns():
+    """
+    Retrieves all data from MongoDB and exports all columns to a CSV file 'all_columns.csv'.
+    """
     BUCKT = 10_000
     SKIP = 0
     df_all = pd.DataFrame()
@@ -72,13 +87,18 @@ def to_csv_all_columns():
     df_all.to_csv('output/all_columns.csv', index=False)
     
 def dict_to_row_short(doc):
-    """ Converte dict para row
+    """
+    Converts a dictionary of data into a row format for CSV export.
 
     Args:
-        doc dict: dicionario dos dados
+    - doc (dict): Dictionary of data.
 
     Returns:
-        list: row
+    - dict: Row formatted data.
+
+    Notes:
+    - Handles conversion of abstract_inverted_index to abstract.
+    - Appends keywords and their scores as columns.
     """
     display_name, souce_id, l_issns, is_med = filter_by_issn(doc.get('locations',[]),)
     if True:
@@ -116,6 +136,10 @@ def dict_to_row_short(doc):
         return {}
 
 def to_csv():
+    """
+    Retrieves specific data from MongoDB, filters by article type and non-empty keywords,
+    and exports filtered data to CSV files 'nomed_filtrado.csv' and 'soucer.csv'.
+    """
     BUCKT = 10_000
     SKIP = 0
     df_all = pd.DataFrame()
