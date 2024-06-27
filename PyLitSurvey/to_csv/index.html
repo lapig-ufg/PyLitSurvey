@@ -1,0 +1,963 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the PyLitSurvey Project">
+      
+      
+        <meta name="author" content="Jairo Matos da Rocha">
+      
+      
+      
+        <link rel="prev" href="../funcs/">
+      
+      
+      
+      <link rel="icon" href="https://lapig-ufg.github.io/grassland-literature-review/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.4.14">
+    
+    
+      
+        <title>To csv - PyLitSurvey Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#to_csv" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="PyLitSurvey Documentation" class="md-header__button md-logo" aria-label="PyLitSurvey Documentation" data-md-component="logo">
+      
+  <img src="https://lapig-ufg.github.io/grassland-literature-review/assets/layout/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PyLitSurvey Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              To csv
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/lapig-ufg/PyLitSurvey" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lapig-ufg/PyLitSurvey
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="PyLitSurvey Documentation" class="md-nav__button md-logo" aria-label="PyLitSurvey Documentation" data-md-component="logo">
+      
+  <img src="https://lapig-ufg.github.io/grassland-literature-review/assets/layout/images/logo.png" alt="logo">
+
+    </a>
+    PyLitSurvey Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/lapig-ufg/PyLitSurvey" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lapig-ufg/PyLitSurvey
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The PyLitSurvey
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PyLitSurvey
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            PyLitSurvey
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../funcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funcs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    To csv
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    To csv
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#to_csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      to_csv
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to_csv.dict_to_row_short" class="md-nav__link">
+    <span class="md-ellipsis">
+      dict_to_row_short()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to_csv.filter_by_issn" class="md-nav__link">
+    <span class="md-ellipsis">
+      filter_by_issn()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to_csv.to_csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      to_csv()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to_csv.to_csv_all_columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      to_csv_all_columns()
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#to_csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      to_csv
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to_csv.dict_to_row_short" class="md-nav__link">
+    <span class="md-ellipsis">
+      dict_to_row_short()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to_csv.filter_by_issn" class="md-nav__link">
+    <span class="md-ellipsis">
+      filter_by_issn()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to_csv.to_csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      to_csv()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to_csv.to_csv_all_columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      to_csv_all_columns()
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>To csv</h1>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="to_csv"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="to_csv.dict_to_row_short" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">dict_to_row_short</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Converts a dictionary of data into a row format for CSV export.</p>
+<p>Args:
+- doc (dict): Dictionary of data.</p>
+<p>Returns:
+- dict: Row formatted data.</p>
+<p>Notes:
+- Handles conversion of abstract_inverted_index to abstract.
+- Appends keywords and their scores as columns.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>to_csv.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dict_to_row_short</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a dictionary of data into a row format for CSV export.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    - doc (dict): Dictionary of data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - dict: Row formatted data.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">    - Handles conversion of abstract_inverted_index to abstract.</span>
+<span class="sd">    - Appends keywords and their scores as columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">display_name</span><span class="p">,</span> <span class="n">souce_id</span><span class="p">,</span> <span class="n">l_issns</span><span class="p">,</span> <span class="n">is_med</span> <span class="o">=</span> <span class="n">filter_by_issn</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;locations&#39;</span><span class="p">,[]),)</span>
+    <span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+
+        <span class="n">row</span> <span class="o">=</span>  <span class="p">{</span>
+            <span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_id&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;doi&#39;</span><span class="p">:</span> <span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;doi&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;language&#39;</span><span class="p">:</span><span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;language&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;type_crossref&#39;</span><span class="p">:</span><span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type_crossref&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;ismed&#39;</span><span class="p">:</span> <span class="n">is_med</span><span class="p">,</span>
+            <span class="s1">&#39;id_sourcer&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">souce_id</span><span class="p">),</span>
+
+            <span class="s1">&#39;cited_by_count&#39;</span><span class="p">:</span><span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cited_by_count&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="s1">&#39;publication_date&#39;</span><span class="p">:</span><span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;publication_date&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">),</span>
+            <span class="s1">&#39;referenced_works_count&#39;</span><span class="p">:</span><span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;referenced_works_count&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="s1">&#39;relevance_score&#39;</span><span class="p">:</span><span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;relevance_score&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+
+            <span class="c1">#&#39;issns&#39;:str(l_issns),</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="n">doc</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+
+
+        <span class="p">}</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;abstract&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">abstract_inverted_index2abstract</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;abstract_inverted_index&#39;</span><span class="p">,{}))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="o">...</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;keywords&#39;</span><span class="p">,[])):</span>
+            <span class="n">row</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;keyword_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">keyword</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;keyword&#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">row</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;keyword_score_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">keyword</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;score&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">row</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="to_csv.filter_by_issn" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">filter_by_issn</span><span class="p">(</span><span class="n">locations</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Filters locations data based on ISSN.</p>
+<p>Args:
+- locations (list): List of location dictionaries.</p>
+<p>Returns:
+- Tuple of comma-separated strings: (display_name, souce_id, l_issns, soucer_is_med)</p>
+<p>Raises:
+- Exception: If there's an error processing locations data.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>to_csv.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">filter_by_issn</span><span class="p">(</span><span class="n">locations</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filters locations data based on ISSN.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    - locations (list): List of location dictionaries.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - Tuple of comma-separated strings: (display_name, souce_id, l_issns, soucer_is_med)</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">    - Exception: If there&#39;s an error processing locations data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># [{&quot;is_oa&quot;: false, &quot;landing_page_url&quot;: &quot;https://doi.org/10.1146/annurev.ecolsys.28.1.517&quot;, &quot;pdf_url&quot;: null, &quot;source&quot;: {&quot;id&quot;: &quot;https://openalex.org/S4210205963&quot;, &quot;display_name&quot;: &quot;Annual review of ecology and systematics&quot;, &quot;issn_l&quot;: &quot;0066-4162&quot;, &quot;issn&quot;: [&quot;0066-4162&quot;, &quot;2330-1902&quot;], &quot;is_oa&quot;: false, &quot;is_in_doaj&quot;: false, &quot;host_organization&quot;: &quot;https://openalex.org/P4310320373&quot;, &quot;host_organization_name&quot;: &quot;Annual Reviews&quot;, &quot;host_organization_lineage&quot;: [&quot;https://openalex.org/P4310320373&quot;], &quot;host_organization_lineage_names&quot;: [&quot;Annual Reviews&quot;], &quot;type&quot;: &quot;journal&quot;}, &quot;license&quot;: null, &quot;version&quot;: null, &quot;is_accepted&quot;: false, &quot;is_published&quot;: false}]</span>
+    <span class="n">l_issns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">display_name</span> <span class="o">=</span> <span class="p">[]</span>  
+    <span class="n">souce_id</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">is_med</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">soucer_is_med</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="n">locations</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">souce</span> <span class="o">=</span> <span class="n">location</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">,{})</span>
+                <span class="k">if</span> <span class="n">souce</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">local_is_med</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">souce</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span><span class="s1">&#39;NAN&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span> <span class="s1">&#39;https://openalex.org/&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">MED</span><span class="p">[</span><span class="n">MED</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">_id</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">is_med</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="n">local_is_med</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">souce</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;display_name&quot;</span><span class="p">,</span><span class="s1">&#39;NAN&#39;</span><span class="p">))</span>
+                    <span class="n">isss</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">souce</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;issn_l&quot;</span><span class="p">,</span><span class="s1">&#39;NAN&#39;</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">_id</span> <span class="ow">in</span> <span class="n">SOUCER_ID</span><span class="p">:</span>
+                        <span class="n">SOUCER_ID</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_id</span><span class="p">)</span>
+                        <span class="n">SOUCER</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                            <span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="n">_id</span><span class="p">,</span>
+                            <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">name</span><span class="p">,</span>
+                            <span class="s1">&#39;issn_l&#39;</span><span class="p">:</span><span class="n">isss</span>
+
+                        <span class="p">})</span>
+                    <span class="n">display_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                    <span class="n">souce_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_id</span><span class="p">)</span>
+                    <span class="n">l_issns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">isss</span><span class="p">)</span>
+                    <span class="n">soucer_is_med</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">local_is_med</span><span class="p">))</span>
+
+
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Location fall&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">display_name</span><span class="p">),</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">souce_id</span><span class="p">),</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">l_issns</span><span class="p">),</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">soucer_is_med</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="to_csv.to_csv" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">to_csv</span><span class="p">()</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Retrieves specific data from MongoDB, filters by article type and non-empty keywords,
+and exports filtered data to CSV files 'nomed_filtrado.csv' and 'soucer.csv'.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>to_csv.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_csv</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves specific data from MongoDB, filters by article type and non-empty keywords,</span>
+<span class="sd">    and exports filtered data to CSV files &#39;nomed_filtrado.csv&#39; and &#39;soucer.csv&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">BUCKT</span> <span class="o">=</span> <span class="mi">10_000</span>
+    <span class="n">SKIP</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">df_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">MongoClient</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">MONGO_URI</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;biblimetry_</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">VERSION</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+            <span class="n">colection</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;works&#39;</span><span class="p">]</span>
+            <span class="n">all_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">colection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span>
+                <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;article&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;keywords&#39;</span><span class="p">:{</span><span class="s1">&#39;$ne&#39;</span><span class="p">:[]}</span>
+                <span class="p">},{</span>
+                <span class="s1">&#39;_id&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;title&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;doi&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;language&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;type_crossref&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;locations&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+
+                <span class="s1">&#39;cited_by_count&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;publication_date&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;referenced_works_count&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;relevance_score&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+
+                <span class="s1">&#39;keywords&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;abstract_inverted_index&#39;</span><span class="p">:</span><span class="mi">1</span>
+
+
+                <span class="p">})</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">BUCKT</span><span class="p">)</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="n">SKIP</span><span class="p">))</span>
+
+            <span class="n">df_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_all</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">dict_to_row_short</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">all_data</span><span class="p">])])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">all_data</span><span class="p">:</span>
+                <span class="k">break</span>
+
+            <span class="n">SKIP</span> <span class="o">+=</span> <span class="n">BUCKT</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">SKIP</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">df_all</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;output/nomed_filtrado.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">SOUCER</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;output/soucer.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="to_csv.to_csv_all_columns" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">to_csv_all_columns</span><span class="p">()</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Retrieves all data from MongoDB and exports all columns to a CSV file 'all_columns.csv'.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>to_csv.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_csv_all_columns</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves all data from MongoDB and exports all columns to a CSV file &#39;all_columns.csv&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">BUCKT</span> <span class="o">=</span> <span class="mi">10_000</span>
+    <span class="n">SKIP</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">df_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">MongoClient</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">MONGO_URI</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;biblimetry_</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">VERSION</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+            <span class="n">colection</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;works&#39;</span><span class="p">]</span>
+            <span class="n">all_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">colection</span><span class="o">.</span><span class="n">find</span><span class="p">({})</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">BUCKT</span><span class="p">)</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="n">SKIP</span><span class="p">))</span>
+
+            <span class="n">df_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_all</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">to_row</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">all_data</span><span class="p">])])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">all_data</span><span class="p">:</span>
+                <span class="k">break</span>
+
+            <span class="n">SKIP</span> <span class="o">+=</span> <span class="n">BUCKT</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">SKIP</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">df_all</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;output/all_columns.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Jairo Matos da Rocha
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.cd18aaf1.min.js"></script>
+      
+    
+  </body>
+</html>

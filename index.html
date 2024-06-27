@@ -1,0 +1,830 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the PyLitSurvey Project">
+      
+      
+        <meta name="author" content="Jairo Matos da Rocha">
+      
+      
+      
+      
+        <link rel="next" href="PyLitSurvey/funcs/">
+      
+      
+      <link rel="icon" href="https://lapig-ufg.github.io/grassland-literature-review/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.4.14">
+    
+    
+      
+        <title>PyLitSurvey Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-pylitsurvey" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="." title="PyLitSurvey Documentation" class="md-header__button md-logo" aria-label="PyLitSurvey Documentation" data-md-component="logo">
+      
+  <img src="https://lapig-ufg.github.io/grassland-literature-review/assets/layout/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PyLitSurvey Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The PyLitSurvey
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/lapig-ufg/PyLitSurvey" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lapig-ufg/PyLitSurvey
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="PyLitSurvey Documentation" class="md-nav__button md-logo" aria-label="PyLitSurvey Documentation" data-md-component="logo">
+      
+  <img src="https://lapig-ufg.github.io/grassland-literature-review/assets/layout/images/logo.png" alt="logo">
+
+    </a>
+    PyLitSurvey Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/lapig-ufg/PyLitSurvey" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lapig-ufg/PyLitSurvey
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    The PyLitSurvey
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    The PyLitSurvey
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuracoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurações
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configurações">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      DEBUG
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    <span class="md-ellipsis">
+      QUERY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter_lang" class="md-nav__link">
+    <span class="md-ellipsis">
+      FILTER_LANG
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maxyear" class="md-nav__link">
+    <span class="md-ellipsis">
+      MAXYEAR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    <span class="md-ellipsis">
+      VERSION
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cores" class="md-nav__link">
+    <span class="md-ellipsis">
+      CORES
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo de Uso
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PyLitSurvey
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            PyLitSurvey
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PyLitSurvey/funcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Funcs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PyLitSurvey/to_csv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    To csv
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuracoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurações
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configurações">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      DEBUG
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    <span class="md-ellipsis">
+      QUERY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter_lang" class="md-nav__link">
+    <span class="md-ellipsis">
+      FILTER_LANG
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maxyear" class="md-nav__link">
+    <span class="md-ellipsis">
+      MAXYEAR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    <span class="md-ellipsis">
+      VERSION
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cores" class="md-nav__link">
+    <span class="md-ellipsis">
+      CORES
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo de Uso
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="the-pylitsurvey">The PyLitSurvey</h1>
+<p>O arquivo <code>settings.toml</code> é utilizado para configurar variáveis e parâmetros importantes para a execução dos scripts da aplicação PyLitSurvey. Abaixo, é fornecida uma descrição detalhada de cada configuração presente no arquivo.</p>
+<h2 id="configuracoes">Configurações</h2>
+<h3 id="debug"><code>DEBUG</code></h3>
+<ul>
+<li><strong>Tipo</strong>: Booleano</li>
+<li><strong>Descrição</strong>: Define se o modo de depuração está ativado.</li>
+<li><strong>Valor</strong>: </li>
+<li><code>true</code>: O modo de depuração está ativado, o que pode fornecer informações adicionais para depuração e desenvolvimento.</li>
+<li><code>false</code>: O modo de depuração está desativado.</li>
+</ul>
+<h3 id="query"><code>QUERY</code></h3>
+<ul>
+<li><strong>Tipo</strong>: String</li>
+<li><strong>Descrição</strong>: A consulta utilizada para pesquisar trabalhos acadêmicos.</li>
+<li><strong>Valor</strong>: </li>
+<li><code>"grazing land" OR pastureland OR pasture OR rangeland OR grassland OR savanna OR savannah OR shrubland OR "forage crop" OR "perennial forage"</code>: Esta consulta busca por documentos que contenham qualquer um dos termos listados relacionados a terras de pastagem e vegetação similar.</li>
+</ul>
+<h3 id="filter_lang"><code>FILTER_LANG</code></h3>
+<ul>
+<li><strong>Tipo</strong>: String</li>
+<li><strong>Descrição</strong>: Filtro de idioma para os resultados da consulta.</li>
+<li><strong>Valor</strong>: </li>
+<li><code>'en|pt|fr|es'</code>: Filtra os resultados para incluir apenas documentos escritos em inglês (<code>en</code>), português (<code>pt</code>), francês (<code>fr</code>) e espanhol (<code>es</code>).</li>
+</ul>
+<h3 id="maxyear"><code>MAXYEAR</code></h3>
+<ul>
+<li><strong>Tipo</strong>: String</li>
+<li><strong>Descrição</strong>: Ano máximo de publicação dos documentos a serem considerados.</li>
+<li><strong>Valor</strong>: </li>
+<li><code>'-2023'</code>: Considera apenas documentos publicados até o ano de 2023.</li>
+</ul>
+<h3 id="version"><code>VERSION</code></h3>
+<ul>
+<li><strong>Tipo</strong>: String</li>
+<li><strong>Descrição</strong>: Versão da configuração ou do banco de dados a ser utilizado.</li>
+<li><strong>Valor</strong>: </li>
+<li><code>'001'</code>: A versão atual é <code>001</code>.</li>
+</ul>
+<h3 id="cores"><code>CORES</code></h3>
+<ul>
+<li><strong>Tipo</strong>: Inteiro</li>
+<li><strong>Descrição</strong>: Número de núcleos de CPU a serem utilizados para processamento paralelo.</li>
+<li><strong>Valor</strong>: </li>
+<li><code>48</code>: Utiliza 48 núcleos de CPU para otimizar o desempenho das operações de processamento.</li>
+</ul>
+<h2 id="exemplo-de-uso">Exemplo de Uso</h2>
+<p>O arquivo <code>settings.toml</code> deve ser colocado no diretório de configuração da aplicação PyLitSurvey. Durante a execução dos scripts, essas configurações são carregadas para ajustar a operação de acordo com os parâmetros especificados.</p>
+<p>```toml
+[default]
+DEBUG=true
+QUERY='"grazing land" OR pastureland OR pasture OR rangeland OR grassland OR savanna OR savannah OR shrubland OR "forage crop" OR "perennial forage"'
+FILTER_LANG='en|pt|fr|es'
+MAXYEAR='-2023'
+VERSION='001'
+CORES=48</p>
+<h1 id="documentacao-do-script-get_litpy">Documentação do Script <code>get_lit.py</code></h1>
+<p>O script <code>get_lit.py</code>, que busca trabalhos acadêmicos da API OpenAlex, processa esses dados e os insere em uma coleção MongoDB.</p>
+<h2 id="pre-requisitos">Pré-requisitos</h2>
+<p>Certifique-se de ter as seguintes bibliotecas instaladas:</p>
+<ul>
+<li><code>pymongo</code></li>
+<li><code>pyalex</code></li>
+<li><code>tqdm</code></li>
+<li><code>PyLitSurvey</code></li>
+</ul>
+<h2 id="configuracao">Configuração</h2>
+<h3 id="importacoes">Importações</h3>
+<p>O script utiliza as seguintes bibliotecas:</p>
+<ul>
+<li><code>pymongo</code> para interagir com o MongoDB.</li>
+<li><code>pyalex</code> para buscar dados da API OpenAlex.</li>
+<li><code>tqdm</code> para exibir uma barra de progresso.</li>
+<li><code>PyLitSurvey.config</code> para carregar configurações e o logger.</li>
+</ul>
+<h3 id="configuracao-da-consulta">Configuração da Consulta</h3>
+<ol>
+<li><strong>Criar a consulta à API do OpenAlex</strong>:</li>
+<li>
+<p>A consulta é criada usando a biblioteca <code>pyalex</code> com os parâmetros definidos em <code>settings.QUERY</code> e <code>settings.FILTER_LANG</code>.</p>
+</li>
+<li>
+<p><strong>Contar o número total de documentos que a consulta retornará</strong>:</p>
+</li>
+<li>
+<p>O método <code>count()</code> é usado para obter o total de documentos.</p>
+</li>
+<li>
+<p><strong>Configurar o número de documentos processados por iteração</strong>:</p>
+</li>
+<li>
+<p>A variável <code>ITER_PER_STEP</code> define quantos documentos serão processados em cada iteração (neste caso, 200).</p>
+</li>
+<li>
+<p><strong>Registrar o número total de documentos</strong>:</p>
+</li>
+<li>O logger é utilizado para registrar o total de documentos a serem processados.</li>
+</ol>
+<h3 id="processamento-e-insercao-no-mongodb">Processamento e Inserção no MongoDB</h3>
+<ol>
+<li><strong>Barra de Progresso</strong>:</li>
+<li>
+<p>A barra de progresso é criada usando <code>tqdm</code> e é configurada com o total de iterações.</p>
+</li>
+<li>
+<p><strong>Conectar ao MongoDB</strong>:</p>
+</li>
+<li>
+<p>O script se conecta ao MongoDB utilizando a URI definida em <code>settings.MONGO_URI</code>.</p>
+</li>
+<li>
+<p><strong>Selecionar o Banco de Dados e a Coleção</strong>:</p>
+</li>
+<li>
+<p>O banco de dados e a coleção são selecionados com base nas configurações.</p>
+</li>
+<li>
+<p><strong>Iterar sobre os Documentos</strong>:</p>
+</li>
+<li>
+<p>Os documentos são paginados e processados em lotes de 200.</p>
+</li>
+<li>
+<p><strong>Processar Documentos</strong>:</p>
+</li>
+<li>
+<p>Cada documento é preparado para inserção, incluindo a modificação do campo <code>id</code> para <code>_id</code>.</p>
+</li>
+<li>
+<p><strong>Inserir Documentos no MongoDB</strong>:</p>
+</li>
+<li>
+<p><strong>Inserção em Massa</strong>:</p>
+<ul>
+<li>O script tenta inserir todos os documentos do lote de uma vez.</li>
+</ul>
+</li>
+<li>
+<p><strong>Inserção Individual em Caso de Falha</strong>:</p>
+<ul>
+<li>Se a inserção em massa falhar, o script tenta inserir os documentos individualmente.</li>
+<li>O logger registra se um documento já existe no banco de dados para evitar duplicações.</li>
+<li>Quaisquer outras exceções são registradas para análise posterior.</li>
+</ul>
+</li>
+<li>
+<p><strong>Atualizar a Barra de Progresso</strong>:</p>
+</li>
+<li>A barra de progresso é atualizada a cada 200 documentos processados.</li>
+</ol>
+<h2 id="logs-e-erros">Logs e Erros</h2>
+<ul>
+<li><strong>Duplicação de Chaves</strong>:</li>
+<li>
+<p>Se um documento já existir no MongoDB, será registrado um aviso no logger indicando o ID do documento duplicado.</p>
+</li>
+<li>
+<p><strong>Outras Exceções</strong>:</p>
+</li>
+<li>Qualquer outra exceção será registrada no logger para facilitar a análise e correção de erros.</li>
+</ul>
+<h2 id="conclusao">Conclusão</h2>
+<p>O script <code>get_lit.py</code> permite a importação eficiente de grandes quantidades de dados acadêmicos da API OpenAlex para um banco de dados MongoDB, lidando com a duplicação de chaves e fornecendo feedback em tempo real através de uma barra de progresso.</p>
+<h1 id="documentacao-do-script-to_csvpy">Documentação do Script <code>to_csv.py</code></h1>
+<p>Que filtra, processa e exporta dados de trabalhos acadêmicos de um banco de dados MongoDB para arquivos CSV.</p>
+<h2 id="pre-requisitos_1">Pré-requisitos</h2>
+<p>Certifique-se de ter as seguintes bibliotecas instaladas:</p>
+<ul>
+<li><code>pandas</code></li>
+<li><code>pymongo</code></li>
+<li><code>PyLitSurvey</code></li>
+</ul>
+<h2 id="configuracao_1">Configuração</h2>
+<h3 id="importacoes_1">Importações</h3>
+<p>O script utiliza as seguintes bibliotecas:</p>
+<ul>
+<li><code>pandas</code> para manipulação de dados.</li>
+<li><code>pymongo</code> para interagir com o MongoDB.</li>
+<li><code>PyLitSurvey.funcs</code> para funções utilitárias como <code>to_row</code> e <code>abstract_inverted_index2abstract</code>.</li>
+<li><code>PyLitSurvey.config</code> para carregar configurações e o logger.</li>
+</ul>
+<h3 id="configuracao-inicial">Configuração Inicial</h3>
+<ol>
+<li><strong>Carregar Dados Médicos</strong>:</li>
+<li>
+<p>O arquivo <code>med.csv</code> é carregado em um DataFrame <code>MED</code>.</p>
+</li>
+<li>
+<p><strong>Inicializar Listas</strong>:</p>
+</li>
+<li><code>SOUCER</code> e <code>SOUCER_ID</code> são listas inicializadas para armazenar dados de fontes.</li>
+</ol>
+<h2 id="funcoes">Funções</h2>
+<h3 id="filter_by_issnlocations"><code>filter_by_issn(locations)</code></h3>
+<p>Esta função filtra informações de locais baseadas no ISSN.</p>
+<ul>
+<li><strong>Parâmetros</strong>:</li>
+<li>
+<p><code>locations</code> (list): Lista de dicionários contendo informações de locais.</p>
+</li>
+<li>
+<p><strong>Retorna</strong>:</p>
+</li>
+<li>
+<p>Uma tupla com nomes de exibição, IDs de fontes, ISSNs e um indicador se a fonte está na lista médica.</p>
+</li>
+<li>
+<p><strong>Processo</strong>:</p>
+</li>
+<li>Itera sobre cada local, extrai informações da fonte e verifica se a fonte está na lista médica (<code>MED</code>).</li>
+<li>Atualiza listas globais (<code>SOUCER</code>, <code>SOUCER_ID</code>) para evitar duplicações.</li>
+<li>Retorna uma string concatenada de nomes de exibição, IDs de fontes, ISSNs e indicadores médicos.</li>
+</ul>
+<h3 id="to_csv_all_columns"><code>to_csv_all_columns()</code></h3>
+<p>Esta função exporta todos os documentos do MongoDB para um CSV, incluindo todas as colunas.</p>
+<ul>
+<li><strong>Processo</strong>:</li>
+<li>Conecta ao MongoDB e seleciona a coleção <code>works</code>.</li>
+<li>Itera sobre os documentos em blocos de 10.000.</li>
+<li>Concatena os dados em um DataFrame e exporta para <code>output/all_columns.csv</code>.</li>
+</ul>
+<h3 id="dict_to_row_shortdoc"><code>dict_to_row_short(doc)</code></h3>
+<p>Esta função converte um documento do MongoDB em uma linha de DataFrame.</p>
+<ul>
+<li><strong>Parâmetros</strong>:</li>
+<li>
+<p><code>doc</code> (dict): Dicionário contendo dados do documento.</p>
+</li>
+<li>
+<p><strong>Retorna</strong>:</p>
+</li>
+<li>
+<p>Um dicionário representando uma linha do DataFrame.</p>
+</li>
+<li>
+<p><strong>Processo</strong>:</p>
+</li>
+<li>Chama <code>filter_by_issn</code> para obter informações de locais.</li>
+<li>Monta uma linha com campos específicos do documento.</li>
+<li>Adiciona um campo <code>abstract</code> convertido se disponível.</li>
+<li>Adiciona campos de palavras-chave se disponíveis.</li>
+</ul>
+<h3 id="to_csv"><code>to_csv()</code></h3>
+<p>Esta função exporta documentos filtrados do MongoDB para um CSV, incluindo apenas colunas específicas.</p>
+<ul>
+<li><strong>Processo</strong>:</li>
+<li>Conecta ao MongoDB e seleciona a coleção <code>works</code>.</li>
+<li>Itera sobre os documentos filtrados por tipo e palavras-chave em blocos de 10.000.</li>
+<li>Concatena os dados em um DataFrame e exporta para <code>output/nomed_filtrado.csv</code>.</li>
+<li>Exporta a lista de fontes para <code>output/soucer.csv</code>.</li>
+</ul>
+<h2 id="logs-e-erros_1">Logs e Erros</h2>
+<ul>
+<li><strong>Exceções</strong>:</li>
+<li>O logger registra exceções ocorridas durante o processamento de locais e ao converter documentos.</li>
+<li>Exceções são levantadas com mensagens apropriadas para facilitar a depuração.</li>
+</ul>
+<h2 id="conclusao_1">Conclusão</h2>
+<p>O script <code>to_csv.py</code> permite a exportação eficiente de dados acadêmicos filtrados de um banco de dados MongoDB para arquivos CSV, lidando com a verificação de fontes e a inclusão de campos relevantes de forma organizada.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Jairo Matos da Rocha
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.cd18aaf1.min.js"></script>
+      
+    
+  </body>
+</html>
