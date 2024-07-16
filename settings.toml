@@ -1,7 +1,8 @@
 [default]
 DEBUG=true
-QUERY='"grazing land" OR pastureland OR pasture OR rangeland OR grassland OR savanna OR savannah OR shrubland OR "forage crop" OR "perennial forage" '
+QUERY='(cerrado OR savanna) AND (brazil OR brasil)'
 FILTER_LANG='en|pt|fr|es'
-MAXYEAR='-2023'
+MAXYEAR='-2024'
 VERSION='001'
 CORES=48
+MONGO_URI=''
