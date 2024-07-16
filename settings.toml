@@ -5,4 +5,4 @@ FILTER_LANG='en|pt|fr|es'
 MAXYEAR='-2024'
 VERSION='001'
 CORES=48
-MONGO_URI=''
+MONGO_URI='mongodb://localhost:27017'
